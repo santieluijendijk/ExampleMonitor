@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Status"
+    targetNamespace="http://data.co.za/schemas/cascades/status"
+    elementFormDefault="qualified"
+    xmlns="http://data.co.za/schemas/cascades/status"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xs:simpleType name="MessageLabel">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="Caption">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Sequence">
+    <xs:restriction base="xs:integer">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Severity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Off"/>
+      <!-- Additional severity values that are an initial indication of which targets to send messages to -->
+      <xs:enumeration value="Severe"/>
+      <xs:enumeration value="Critical"/>
+      <xs:enumeration value="Error"/>
+      <xs:enumeration value="Warning"/>
+      <xs:enumeration value="Information"/>
+      <xs:enumeration value="Verbose"/>
+      <xs:enumeration value="Debug"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Date">
+    <xs:restriction base="xs:dateTime">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Message">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Name">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="State">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown"/>
+      <xs:enumeration value="Nominal"/>
+      <xs:enumeration value="Warning"/>
+      <xs:enumeration value="Error"/>
+      <xs:enumeration value="Critical"/>
+      <xs:enumeration value="Expired"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Number">
+    <xs:restriction base="xs:integer">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Session">
+    <xs:sequence>
+      <xs:element name="Name" type="Name"/>
+      <xs:element name="Path" type="Name"/>
+      <xs:element name="State" type="State"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Channel">
+    <xs:sequence>
+      <xs:element name="Name" type="Name"/>
+      <xs:element name="Path" type="Name"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!--Added optional element Tag to be used in PPSS processing-->
+  <xs:complexType name="Event">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="Date"/>
+      <xs:element minOccurs="0" name="Name" type="Name"/>
+      <xs:element minOccurs="0" name="Prefix" type="Name"/>
+      <xs:element minOccurs="0" name="EventName" type="Name"/>
+      <xs:element name="Message" type="Message"/>
+      <xs:element minOccurs="0" name="Application" type="Name"/>
+      <xs:element minOccurs="0" name="Channel" type="Channel"/>
+      <xs:element minOccurs="0" name="State" type="State"/>
+      <xs:element minOccurs="0" name="Sequence" type="Sequence"/>
+      <xs:element minOccurs="0" name="Tag" type="Name"/>
+      <xs:element minOccurs="0" name="Status" type="StatusType"/>
+      <xs:element name="Severity" type="Severity"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Command">
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Enabled" type="xs:boolean" use="required" />
+    <xs:attribute name="Target" type="xs:string" use="required"  />
+    <xs:attribute name="Date" type="Date" use="optional"  />
+  </xs:complexType>
+
+  <!--List of Commands that are valid in this component-->
+  <xs:complexType name="Commands">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Command" type="Command"/>
+    </xs:sequence>
+    <xs:attribute name="Application" type="xs:string" use="required" />
+    <xs:attribute name="Component" type="xs:string" use="optional" />
+    <xs:attribute name="LastCommand" type="xs:int" use="optional" default="0"/>
+  </xs:complexType>
+
+  <xs:complexType name="Configuration">
+    <xs:sequence>
+      <xs:element name="Mode" type="Name"/>
+      <xs:element name="Description" type="Name"/>
+      <xs:any maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Application" type="xs:string" use="required" />
+    <xs:attribute name="Component" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <!--NOTE: The xs:any is used to add a dummy sub-element, Description, to the Request element to make encapsulation work. -->
+  <!--Encapsulation does not work on elements that consist only of attributes-->
+
+  <!--Command that is issued by selecting one of the valid commands in the user interface-->
+  <!--If component attribute is not supplied - request applies to all components in this application-->
+  <!--In reality, all Requests will be at Component level-->
+  <!--TODO: Add user-name and ip-address to enable logging Request-->
+  <xs:complexType name="Request">
+    <xs:sequence minOccurs="0">
+      <xs:any maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Application" type="xs:string" use="optional"/>
+    <xs:attribute name="Component" type="xs:string" use="optional"/>
+    <xs:attribute name="Date" type="Date" use="optional"/>
+    <xs:attribute name="LastCommand" type="xs:int" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="Events">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Event" type="Event"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Sessions">
+    <xs:sequence>
+      <xs:element  minOccurs="0" maxOccurs="unbounded" name="Session" type="Session"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ActionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Merge"/>
+      <xs:enumeration value="Replace"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="LocalRemoteType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Remote"/>
+      <xs:enumeration value="Local"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Component">
+    <xs:sequence>
+      <xs:element name="Name" type="Name"/>
+      <xs:element name="Status" type="StatusType"/>
+      <xs:element name="Sessions" type="Sessions"/>
+      <!--These are included in the any part of the sequence-->
+      <!--<xs:element name="Configuration" type="Configuration" minOccurs="0"/>
+      <xs:element name="Commands" type="Commands" minOccurs="0"/>-->
+      <xs:any maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="Application" type="xs:string" use="optional"/>
+    <xs:attribute name="Action" type="ActionType" use="optional" default="Merge"/>
+    <!--Note: I do not think these should be here. Remove these-->
+    <xs:attribute name="Local-Remote" type="LocalRemoteType" use="optional" default="Remote"/>
+    <xs:attribute name="LampTest" type="xs:boolean" use="optional" default="false"/>
+  </xs:complexType>
+
+  <xs:complexType name="Components">
+    <xs:sequence>
+      <xs:element  minOccurs="0" maxOccurs="unbounded" name="Component" type="Component"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Application">
+    <xs:sequence>
+      <xs:element name="Name" type="Name"/>
+      <xs:element name="Status" type="StatusType"/>
+      <xs:element name="Components" type="Components"/>
+      <!--These are included in the any part of the sequence-->
+      <!--<xs:element name="Configuration" type="Configuration" minOccurs="0"/>
+      <xs:element name="Commands" type="Commands" minOccurs="0"/>-->
+      <xs:any maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Applications">
+    <xs:sequence>
+      <xs:element  minOccurs="0" maxOccurs="unbounded" name="Application" type="Application"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Status">
+    <xs:sequence>
+      <xs:element name="Caption" type="Name"/>
+      <xs:element name="Date" type="Date"/>
+      <xs:element name="Events" type="Events"/>
+      <xs:element minOccurs="0" name="Commands" type="Commands"/>
+      <xs:element name="Applications" type="Applications"/>
+    </xs:sequence>
+    <xs:attribute name="StartDate" type="Date" use="optional"/>
+    <xs:attribute name="LastEvent" type="xs:integer" use="optional"/>
+  </xs:complexType>
+
+  <xs:element name="Event" type="Event"/>
+  <xs:element name="Command" type="Command"/>
+  <xs:element name="Request" type="Request"/>
+  <xs:element name="Configuration" type="Configuration"/>
+  <xs:element name="Session" type="Session"/>
+  <xs:element name="Channel" type="Channel"/>
+  <xs:element name="Application" type="Application"/>
+  <xs:element name="Component" type="Component"/>
+  <xs:element name="Status" type="Status"/>
+  <xs:element name="State" type="State"/>
+  <xs:element name="MessageLabel" type="MessageLabel"/>
+  <xs:element name="Description" type="xs:string"/>
+</xs:schema>
+

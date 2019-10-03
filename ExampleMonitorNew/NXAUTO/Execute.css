@@ -1,0 +1,264 @@
+﻿/* Execute.css */
+/* Execute! - Execute! web interface base cascading style sheet */
+/* Copyright (C) 2008, 2009 Data Abstraction (Pty) Ltd, all rights reserved */
+
+body {
+    background-color: #efe1de;
+    padding: 5px;
+    margin: 0 auto;
+    
+}
+
+/* Document Heading */
+#nxhead {
+    padding: 1px;
+    line-height: 1em;
+    min-height: 1em;
+    width: 99%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+}
+    
+/* Elements within document heading */
+#hcentre {
+    float: left;
+    width:40%;
+    font-weight: bold;
+    text-align: center;
+}
+
+#hright {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+
+#hleft {
+    float: left;
+    width: 30%;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Main part of documents containing tables */
+#nxmain {
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+div#nxmain
+{
+    text-align: center;
+}
+
+div#nxmain table 
+{
+    margin: 0 auto; 
+    text-align: left;
+}
+
+#nxform {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#nxmessage {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+/* Tables */
+table.list {
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
+
+/* Header & Footer */
+table th, td {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+td.message  {
+    white-space: nowrap; 
+    overflow: hidden;
+    /*text-overflow: ellipsis; */
+}
+
+td.message  {
+	max-width:20em;
+	width:20em;
+
+}
+
+table th {
+    font-weight: normal;
+    padding: 4px 4px 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* table column classes */
+
+/* 5em, centred */
+table .w1 {
+    width: 5em;
+    text-align: center;
+}
+
+/* 10em, centred */
+table .w2 {
+    width: 10em;
+    text-align: center;
+}
+
+/* 15em, centred */
+table .w3 {
+    width: 15em;
+    text-align: center;
+}
+
+/* 10em, left justified */
+table .w4 {
+    width: 10em;
+    text-align: left;
+}
+
+/* Header button bar */
+#nxbar {
+    width: 99%;
+    height:2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    width: 80px;
+    padding: 0px;
+    float: left;
+    height: 1.8em;
+}
+
+.spacer {
+    width: 10px;
+    float: left;
+}
+
+/* Forms */
+input {
+    margin-right: 0px;
+    float: left;
+}
+
+input.readonly {
+    color: Gray;
+}
+
+.formblock {
+    margin-left: 200px;
+    margin-top: 100px;
+    width: 200px;
+}
+
+.label {
+    display: inline;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+.inputfield {
+    margin-bottom: 5px;
+}
+
+td.running
+{
+    background-color:Green;
+    color:White;
+}
+
+td.failed
+{
+    background-color:Red;
+}
+
+td.stopped
+{
+    background-color:Orange;
+}
+
+td.unknown
+{
+    background-color:Gray;
+}
+.graph
+{
+     font-family:Gill Sans Light, Arial;
+     font-size:11pt;
+}
+.cluster
+{
+     font-size:9pt;
+}
+.node
+{
+/*     font-size:11pt; */
+}
+.edge
+{
+     font-size:9pt; 
+}
+g text
+{
+    fill:grey;
+}
+g.N text
+{
+    fill:black;
+}
+g.N polygon
+{
+    stroke:black;
+    fill:grey;
+}
+g.E path, g.E polygon
+{
+    stroke:grey;
+    fill:grey;
+}
+g.NFailed polygon, g.NFailed path, g.NNotReady polygon, g.NNotReady path
+{
+    stroke:black;
+    fill:red;
+}
+g.EFailed path, g.EFailed polygon, g.ENotReady polygon, g.ENotReady path
+{
+    stroke:red;
+    fill:red;
+}
+g.NStopped polygon, g.NStopped path, g.NWaiting polygon, g.NWaiting path, g.NConnect polygon, g.NScanSequence polygon
+{
+    stroke:black;
+    fill:orange;
+}
+g.EStopped polygon, g.EStopped path, g.EConnect polygon, g.EConnect path
+{
+    stroke:orange;
+    fill:orange;
+}
+g.NIdle polygon, g.NIdle path, g.NRunning polygon, g.NRunning path
+{
+    stroke:black;
+    fill:Green;
+}
+g.ERunning polygon, g.ERunning path
+{
+    stroke:Green;
+    fill:Green;
+}
+g.NIdle text, g.NWaiting text, g.NConnect text, g.NRunning text, g.NStopped text, g.NFailed text, g.NScanSequence text, g.NNotReady text
+{
+    fill:black;
+}

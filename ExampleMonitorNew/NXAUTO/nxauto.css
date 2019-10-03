@@ -1,0 +1,161 @@
+/* Base Document properties */
+
+body {
+    background-color: #ffffdd;
+    padding: 5px;
+}
+
+/* Document Heading */
+#nxhead {
+    padding: 1px;
+    line-height: 1em;
+    min-height: 1em;
+    width: 980px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+    
+/* Elements within document heading */
+#hcentre {
+    float: left;
+    width:50%;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#hright {
+    float: left;
+    width: 25%;
+    text-align: right;
+}
+
+#hleft {
+    float: left;
+    width: 25%;
+    text-align: left;
+}
+
+/* Main part of documents containing tables */
+#nxmain {
+    padding: 10px;
+    margin-top: 10px;
+    text-align: center;
+    width: 980px;
+}
+
+#nxform {
+    padding: 10px;
+    margin-top: 10px;
+    width: 980px;
+}
+
+#nxmessage {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 980px;
+}
+/* Tables */
+table.list {
+    border: 1px solid #0000ff;
+    padding: 2px;
+    border-collapse: collapse;
+    background-color: #ffffee;
+/*    text-align: center;*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header & Footer */
+table th, td {
+    padding: 2px;
+    /*border: 1px solid #0000ff;*/
+}
+
+table th {
+    background-color: #c0ffc0;
+    font-weight: normal;
+    padding: 2px;
+    text-align: center;
+}
+
+table .footer {
+    background-color: #ff80ff;
+}
+
+/* table column classes */
+
+/* 5em, centred */
+table .w1 {
+    width: 5em;
+    text-align: center;
+}
+
+/* 10em, centred */
+table .w2 {
+    width: 10em;
+    text-align: center;
+}
+
+/* 15em, centred */
+table .w3 {
+    width: 15em;
+    text-align: center;
+}
+
+/* 10em, left justified */
+table .w4 {
+    width: 10em;
+    text-align: left;
+}
+
+/* Header button bar */
+#nxbar {
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+}
+
+.button {
+    width: 80px;
+    background-color: #c0ffc0;
+    padding: 0px;
+    float: left;
+    height: 1.8em;
+}
+
+.spacer {
+    width: 10px;
+    float: left;
+}
+
+/* Forms */
+input {
+    margin-right: 0px;
+    float: left;
+}
+
+input.readonly {
+    color: Gray;
+}
+
+.formblock {
+    margin-left: 200px;
+    margin-top: 100px;
+    width: 200px;
+}
+
+.label {
+    display: inline;
+    height: 1.8em;
+    line-height: 1.8em;
+}
+
+.inputfield {
+    margin-bottom: 5px;
+}
+
+/* Ambidextrous */
